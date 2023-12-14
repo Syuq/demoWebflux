@@ -34,7 +34,9 @@ public class TutorialService {
   }
 
   public Mono<Tutorial> update(int id, Tutorial tutorial) {
-    return tutorialRepository.findById(id).map(Optional::of).defaultIfEmpty(Optional.empty())
+    return tutorialRepository.findById(id)
+        .map(Optional::of)
+        .defaultIfEmpty(Optional.empty())
         .flatMap(optionalTutorial -> {
           if (optionalTutorial.isPresent()) {
             tutorial.setId(id);
